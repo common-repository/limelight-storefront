@@ -1,0 +1,49 @@
+<button id="ll-boltpay-button" class="btn btn-lg btn-primary btn-block" type="button" onclick="getpaid( '<!--mode-->' );" disabled>Checkout &raquo;</button>
+<script type="text/javascript">
+jQuery( '#<!--form_id-->' ).on( 'change keyup', function() {
+
+	let inputs  = [ 'email', 'phone', 's_first', 's_last', 's_addr1', 's_city', 's_zip' ];
+	let selects = [ 'll-shipping-country', 'll-shipping-state' ];
+	let success = true;
+
+	jQuery.each( inputs, function( i, input_name ) {
+
+		if ( ! jQuery( "input[name='" + input_name + "']" ).val() ) {
+			success = false;
+		}
+	} );
+
+	jQuery.each( selects, function( i, select_name ) {
+
+		if ( ! jQuery( '#' + select_name + ' option:selected' ).val() ) {
+			success = false;
+		}
+	} );
+
+	if ( ! jQuery( 'input#ll-billing-same' ).is( ':checked' ) ) {
+
+		inputs  = [ 'b_first', 'b_last', 'b_addr1', 'b_city', 'b_zip' ];
+		selects = [ 'll-billing-country', 'll-billing-state' ];
+
+		jQuery.each( inputs, function( i, input_name ) {
+
+			if ( ! jQuery( "input[name='" + input_name + "']" ).val() ) {
+				success = false;
+			}
+		} );
+
+		jQuery.each( selects, function( i, select_name ) {
+
+			if ( ! jQuery( '#' + select_name + ' option:selected' ).val() ) {
+				success = false;
+			}
+		} );
+	}
+
+	if ( success ) {
+		jQuery( '#ll-boltpay-button' ).prop( 'disabled', false );
+	}	else {
+		jQuery( '#ll-boltpay-button' ).prop( 'disabled', true );
+	}
+} );
+</script>

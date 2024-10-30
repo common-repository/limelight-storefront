@@ -1,0 +1,7 @@
+.ll-width-18-percent {
+	width: 18%;
+}
+
+#ll-checkout-table img, #ll-cart-table img {
+	max-width: 50px;
+}

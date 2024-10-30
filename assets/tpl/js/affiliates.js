@@ -1,0 +1,1 @@
+localStorage.setItem( 'limelight_affiliates', JSON.stringify( <!--affiliates--> ) );

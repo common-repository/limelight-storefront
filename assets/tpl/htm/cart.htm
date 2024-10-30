@@ -1,0 +1,27 @@
+<form id="ll-cart-form" method="post">
+	<div class="table-responsive">
+		<table id="ll-cart-table" class="table">
+			<tr>
+				<th style="width:10%"></th>
+				<th style="width:25%">Item</th>
+				<th style="width:15%"></th>
+				<th style="width:15%"></th>
+				<th style="width:10%" class="text-right">Quantity</th>
+				<th style="width:12%" class="text-right">Price <small>(Each)</small></th>
+				<th style="width:13%" class="text-right">Price <small>(Sub Total)</small></th>
+			</tr>
+			<tr>
+				<td colspan="7">
+					<div style="text-align:right;font-weight:bold;">Total: $<span id="ll-grand-total"></span></div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<button class="btn btn-light btn-sm mb-3" onclick="event.preventDefault(); window.location = '<!--shop_link-->';">&laquo; Continue Shopping</button>
+	<button id="ll-cart-clear" class="btn btn-light mb-3 btn-sm">Clear Cart</button>
+	<div class="col-sm-6 float-right">
+		<!--coupon_form-->
+		<input id="ll-cart-submit" class="btn btn-primary btn-lg btn-block my-3" type="button" value="Proceed To Checkout &raquo;">
+	</div>
+	<div id="ll-matrix"></div>
+</form>

@@ -1,0 +1,18 @@
+<form id="ll-archive-form-<!--id-->" method="post" onchange="limelightApplyVariantPrice( '<!--id-->' );">
+	<div class="row mb-3">
+		<div class="col-sm-12 text-right">
+			<b style="font-size: 120%;" id="ll-product-price-<!--id-->">$<!--price--></b>
+		</div>
+	</div>
+	<div class="row mb-3">
+		<div class="col-sm-6">
+			Quantity:
+		</div>
+		<div class="col-sm-6">
+			<input class="form-control" name="qty" type="number" value="1" min="1">
+		</div>
+	</div>
+	<!--inputs-->
+	<div id="ll-response-message-<!--id-->" class="alert alert-warning" style="display:none"></div>
+	<input class="btn btn-primary btn-block mb-4" id="ll-add-to-cart-button-<!--id-->" type="submit" class="submit" value="Add To Cart &raquo;" onclick="event.preventDefault(); limelightArchiveAddToCart( '<!--id-->' );">
+</form>

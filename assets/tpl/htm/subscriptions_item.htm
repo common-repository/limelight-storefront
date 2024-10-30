@@ -1,0 +1,38 @@
+<div class="row">
+	<div class="col-sm-1 text-left"><strong><!--order_id--></strong></div>
+	<div class="col-sm-2">
+		<div>
+			<b id="ll-frequency-name-<!--subscription_id-->"><!--freq--></b>
+			<br>
+			<div style="display: <!--actions_display-->">
+				<button style="display: <!--change_freq-->" type="button" class="btn btn-outline-secondary btn-sm" onclick="jQuery( this ).next().toggle();"><i class="fas fa-sync"></i> &nbsp; Change Frequency</button>
+				<div id="ll-frequency-area-<!--subscription_id-->" style="display:none;">
+					<!--avail_freqs-->
+					<button type="button" class="btn btn-outline-secondary btn-sm" onclick="limelightSubscriptionFrequency( '<!--order_id-->', '<!--product_id-->', '<!--subscription_id-->' );">Submit &raquo;</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-2">
+		<div style="display: <!--actions_display-->">
+			<b id="ll-skip-next-<!--subscription_id-->"><!--recurring_date--></b>
+			<button style="display: <!--change_next-->" type="button" class="btn btn-outline-secondary btn-sm" onclick="limelightSubscriptionSkipNext( '<!--subscription_id-->', '<!--order_id-->', '<!--product_id-->' );"><i class="fas fa-fast-forward"></i> &nbsp; Skip Next Cycle</button>
+		</div>
+	</div>
+	<div class="col-sm-1"><img src="<!--pic-->" /></div>
+	<div class="col-sm-2"><!--name--><br /><!--attributes--></div>
+	<div class="col-sm-2"><!--sku--></div>
+	<div class="col-sm-1">
+		<!--product_qty-->
+		<!--
+		<input
+			data-order-id="<!--order_id-->"
+			data-product-id="<!--product_id-->"
+			data-recur-id="<!--next_recurring-->"
+			class="form-control ll-subscription-qty"
+			type="number"
+			value="<!--product_qty-->" />
+		-->
+	</div>
+	<div class="col-sm-1 text-right">$<!--price--></div>
+</div>

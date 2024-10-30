@@ -1,0 +1,21 @@
+<form id="ll-login-form">
+<div class="row">
+	<div class="col-sm-4"></div>
+	<div class="col-sm-4">
+		<label>Email:</label>
+		<input id="ll-login-email" class="form-control mb-3" type="text" placeholder="Email">
+		<label id="ll-login-pass-label">Password:</label>
+		<input id="ll-login-pass" class="form-control mb-3" type="password" placeholder="Password">
+		<div id="ll-login-update" style="display:none;">
+			<label id="ll-login-pass-confirm-label">Confirm Password:</label>
+			<input id="ll-login-pass-confirm" class="form-control mb-3" type="password" placeholder="Password Again">
+			<div id="ll-login-msg" class="alert alert-warning" style="display:none;">
+				Passwords must match and be at least 8 characters.
+			</div>
+			<input id="ll-login-pass-old" class="form-control mb-3" type="hidden">
+		</div>
+		<input id="ll-login-submit" class="btn btn-primary btn-block btn-lg" type="submit" value="Login">
+	</div>
+	<div class="col-sm-4"></div>
+</div>
+</form>

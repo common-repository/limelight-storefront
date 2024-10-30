@@ -1,0 +1,30 @@
+<div class="row mb-4">
+	<div class="col col-sm-8 sub_action_add_product_div">
+		<button type="button" class="btn btn-outline-secondary btn-sm mt-4 sub_action_toggle_add_product" onclick="limelightToggleAddUpsell( this );">
+			<i class="fas fa-plus"></i> &nbsp; Add a New Product
+		</button>
+		<div class="sub_action_select_product_div d-none">
+			<div class="row">
+				<div class="col-sm-4">
+					<select class="form-control-sm btn-outline-secondary mt-4 sub_action_select_product">
+						<option>Select a Product...</option>
+						<!--sub_action_select_products-->
+					</select>
+				</div>
+				<div class="col-sm-4">
+					<!--avail_freqs-->
+				</div>
+				<div class="col-sm-2">
+					<button type="button" class="btn btn-outline-secondary btn-sm mt-4 sub_action_select_add" onclick="limelightAddUpsell( '<!--order_id-->', this );">
+						<i class="fas fa-plus"></i> &nbsp; Add
+					</button>
+				</div>
+				<div class="col-sm-2">
+					<button type="button" class="btn btn-outline-secondary btn-sm mt-4 sub_action_select_cancel" onclick="limelightToggleAddUpsell( this );">
+						<i class="fas fa-ban"></i> &nbsp; Cancel
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

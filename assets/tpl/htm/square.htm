@@ -1,0 +1,95 @@
+<script type="text/javascript" src="https://js.squareup<!--mode-->.com/v2/paymentform"></script>
+<script type="text/javascript">
+const paymentForm = new SqPaymentForm({
+	applicationId: '<!--app_id-->',
+	inputClass: 'sq-input',
+	autoBuild: false,
+	inputStyles: [{
+		fontSize: '16px',
+		lineHeight: '24px',
+		padding: '16px',
+		placeholderColor: '#a0a0a0',
+		backgroundColor: 'transparent',
+	}],
+	cardNumber: {
+		elementId: 'sq-card-number',
+		placeholder: 'Card Number'
+	},
+	cvv: {
+		elementId: 'sq-cvv',
+		placeholder: 'CVV'
+	},
+	expirationDate: {
+		elementId: 'sq-expiration-date',
+		placeholder: 'MM/YY'
+	},
+	postalCode: {
+		elementId: 'sq-postal-code',
+		placeholder: 'Postal'
+	},
+	callbacks: {
+		cardNonceResponseReceived: function (errors, nonce, cardData) {
+
+			lime_loading.hide();
+
+			if (errors) {
+				lime_error_overlay.show();
+				msg = '';
+				errors.forEach(function (error) {
+					msg += '<li>' + error.message + '</li>';
+				});
+				lime_error_message.html( '<h3>Error</h3><ul>' + msg + '</ul>' );
+
+				return;
+			}
+
+			if (! jQuery( "[name='square_token']" ).length) {
+				jQuery( '#<!--form_id-->' ).append('<input name="square_token" type="hidden" value='+nonce+'>');
+			} else {
+				jQuery( "[name='square_token']" ).val(nonce)
+			}
+
+			if (! jQuery( "[name='creditCardType']" ).length) {
+				jQuery( '#<!--form_id-->' ).append('<input name="creditCardType" type="hidden" value="square">');
+			} else {
+				jQuery( "[name='creditCardType']" ).val('square');
+			}
+
+			jQuery.post( ll_ajax_url, { 'action': 'square_process', 'checkout': jQuery( '#<!--form_id-->' ).serializeArray() }, function( raw ) {
+
+				res = JSON.parse( raw );
+
+				if ( res.error_found == 0 ) {
+
+					localStorage.setItem( 'limelight_order_summary', JSON.stringify( res ) );
+					localStorage.setItem( 'limelight_square_nonce', nonce );
+
+					let redirect = ll_thankyou_page;
+
+					jQuery.post( ll_ajax_url, { action: "check_upsells", aj: 1 }, function( raw ) {
+
+						let upsells = JSON.parse( raw );
+
+						if ( upsells[0] !== undefined && upsells[0]['ID'] !== undefined ) {
+							redirect = './?p=' + upsells[0]['ID'];
+							localStorage.setItem( 'limelight_upsells', raw );
+						}
+						window.location = redirect;
+					} );
+
+				} else {
+					lime_error_overlay.show();
+					lime_error_message.html( '<h3>Error</h3><p>' + res.decline_reason + '</p>' );
+				}
+			} ).always( function() {
+				lime_loading.hide();
+			} );
+		}
+	}
+});
+paymentForm.build();
+function onGetCardNonce(event) {
+	event.preventDefault();
+	paymentForm.requestCardNonce();
+}
+</script>

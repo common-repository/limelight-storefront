@@ -1,0 +1,23 @@
+<script type="text/html" id="ll-cart-item">
+<tr>
+	<td>
+		<img data-src="pic" />
+		<input type="hidden" data-value="id"           data-template-bind='[{"attribute": "name", "value": "x_id"}]'>
+		<input type="hidden" data-value="name"         data-template-bind='[{"attribute": "name", "value": "x_name"}]'>
+		<input type="hidden" data-value="variants"     data-template-bind='[{"attribute": "name", "value": "x_variants"}]'>
+		<input type="hidden" data-value="offer_id"     data-template-bind='[{"attribute": "name", "value": "x_offer_id"}]'>
+		<input type="hidden" data-value="frequency"    data-template-bind='[{"attribute": "name", "value": "x_frequency"}]'>
+		<input type="hidden" data-value="sku"          data-template-bind='[{"attribute": "name", "value": "x_sku"}]'>
+		<input type="hidden" data-value="price"        data-template-bind='[{"attribute": "name", "value": "x_price"}]'>
+		<input type="hidden" data-value="line_total"   data-template-bind='[{"attribute": "name", "value": "x_line_total"}]'>
+		<input type="hidden" data-value="wp_id"        data-template-bind='[{"attribute": "name", "value": "x_wp_id"}]'>
+		<input type="hidden" data-value="max_quantity" data-template-bind='[{"attribute": "name", "value": "x_max_quantity"}]'>
+	</td>
+	<td><a data-href="link" data-content="name"></a><br><small class="text-muted" data-content="sku"></small></td>
+	<td><small class="text-muted" data-content="variants"></small></td>
+	<td><small class="text-muted" data-content="frequency_name"></small></td>
+	<td class="text-right"><input class="form-control text-center float-right" type="number" min="0" data-value="qty" data-template-bind='[{"attribute": "name", "value": "x_qty"},{"attribute": "onchange", "value": "onchange"}]'></td>
+	<td class="text-right"><small data-content="price"></small></td>
+	<td class="text-right" data-content="line_total"></td>
+</tr>
+</script>

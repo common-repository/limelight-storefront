@@ -1,0 +1,85 @@
+<script type="text/javascript" src="<!--url-->/bp-inline.js"></script>
+<script type="text/javascript">
+function getpaid( option ) {
+
+	let email;
+	let phone;
+	let first;
+	let last;
+	let elements = jQuery( '#<!--form_id-->' ).serializeArray();
+	let total    = jQuery( '#ll-grand-total' ).html().replace( /,/g, '' );
+
+	if ( total.indexOf( '$' ) != -1 ) {
+		total = total.split( '$' )[1];
+	}
+
+	jQuery.each( elements, function( k, v ) {
+
+		switch( v['name'] ) {
+			case 'email':
+				email = v['value'];
+				break;
+			case 'phone':
+				phone = ( v['value'] != '' ) ? '+1' + v['value'] : '';
+				break;
+			case 's_first':
+				first = v['value'];
+				break;
+			case 's_last':
+				last  = v['value'];
+				break;
+			default:
+		}
+	} );
+
+	const public_key = '<!--key-->';
+	let reference    = 'BP_PB_TRANSACTIONS_' + Math.random();
+
+	boltpaySetup( {
+
+		bp_public_key:      public_key,
+		txref:              reference, 
+		customer_email:     email,
+		customer_phone:     phone,
+		customer_firstname: first,
+		customer_lastname:  last,
+		amount:             total * 100, //cents
+		currency:           'USD',
+		callback: function( response ) {
+
+			let transaction_reference     = response.transaction_information.data.transaction_reference;
+			let transaction_response_code = response.transaction_information.data.responsecode;
+
+			jQuery.post( ll_ajax_url, { 'action': 'boltpay_process', 'checkout': elements, 'txn_ref': transaction_reference }, function( raw ) {
+
+				res = JSON.parse( raw );
+
+				if ( res.error_found == 0 ) {
+
+					let subtotal = jQuery( '#ll-sub-total' ).html();
+					let shipping = jQuery( '#ll-shipping-cost' ).html();
+
+					localStorage.setItem( 'limelight_subtotal', subtotal );
+					localStorage.setItem( 'limelight_shipping', shipping );
+					localStorage.setItem( 'limelight_boltpay', 1 );
+
+					if ( option == 1 ) {
+						localStorage.setItem( 'limelight_onepage', 1 );
+					}
+
+					localStorage.setItem( 'limelight_order_summary', raw );
+					let redirect = ll_thankyou_page;
+
+					window.location = redirect;
+
+				} else {
+					lime_error_overlay.show();
+					lime_error_message.html( limelightErrorDisplay( res ) );
+				}
+			} ).always( function() {
+				lime_loading.hide();
+			} );
+		}
+	} );
+}
+</script>
